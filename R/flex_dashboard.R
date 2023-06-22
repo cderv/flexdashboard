@@ -150,13 +150,6 @@ flex_dashboard <- function(fig_width = 6.0,
   args <- c(args, "--template",
             pandoc_path_arg(resource("default.html")))
 
-  # handle automatic navbar links
-  navbar <- append(navbar, navbar_links(social, source_code))
-
-  # handle navbar
-  if (length(navbar) > 0)
-    args <- c(args, pandoc_navbar_args(navbar))
-
   # resolve orientation
   orientation <- match.arg(orientation)
 
@@ -277,6 +270,13 @@ flex_dashboard <- function(fig_width = 6.0,
                              files_dir, output_dir) {
 
     args <- c()
+
+    # handle automatic navbar links
+    navbar <- append(navbar, navbar_links(social, source_code))
+
+    # handle navbar
+    if (length(navbar) > 0)
+      args <- c(args, pandoc_navbar_args(navbar))
 
     # Restore the original options when the server stops
     # running (instead of when render() is done executing)
